@@ -22,33 +22,36 @@ class Words {
 //: ### variables the same type? If not, why?
 
 
-//: [EXPLAIN YOUR ANSWER HERE]
+//: Yes
 
 
 //: ## Q2: Variable Types and Function Types
-    func arePalindromes(_ words: [String]) -> Bool {
+    class func arePalindromes(_ words: [String]) -> Bool {
         let reversedWords = words.map() {String($0.characters.reversed())}
         let numElements = words.count
         
-        for i in 0 ..< numElements {
+        for i in 0 ... numElements-1 {
             if words[i] != reversedWords[i] {
                 return false
             }
         }
+        return true
     }
 //: ### Why does the compiler dislike the **for loop**? Fix it.
 //: ### What else is wrong with this function? You may have to refer to (but **not**
 //: ### change) the code at the very bottom. Debug the function.
 
+//: Because a for loop should have the syntax for i in 0 ... instead of ..>, also the index is off by 1: it starts with 0 so it should end in len-1
+//: this function should be a class function since it's called using Words.arePalindromes(), so we have to add the word class in front of func. Also, the function should return a boolean value in all cases, so we should return true at the end
 
-//: [EXPLAIN YOUR ANSWER HERE]
+//: should make this into a class function for it to be called, also index is off, also should return something even if false is not checked
 
 
 //: ## Q3: More Functions and Object Initialization
-    class func isAnagram() -> Bool {
-        var countLetters : [Character : Int] //Line X
-        var lenA = self.wordA.characters.count
-        var lenB = self.wordB.characters.count
+    func isAnagram() -> Bool {
+        var countLetters = [Character : Int]() //Line X
+        let lenA = self.wordA.characters.count
+        let lenB = self.wordB.characters.count
         
         if lenA != lenB {
             return false
@@ -75,13 +78,13 @@ class Words {
             }
         }
         
-        for (letter, count) in countLetters {
+        for (_, count) in countLetters {
             if count != 0 {
                 return false
             }
         }
         
-        return nil
+        return true
     }
 //: ### What is the problem with declaring **countLetters** as we do in **Line X**,
 //: ### and then using it in **Line Y**? Fix it (by only changing **Line X**).
@@ -89,7 +92,8 @@ class Words {
 //: ### change) the code at the very bottom. Debug the function.
 
 
-//: [EXPLAIN YOUR ANSWER HERE]
+//: countLetters should be a dictionary, and a dictionary declaration has syntax var name = [key type, var type]()
+//: this function is an instance function since it's called after creating an instance of Words, so we should not have the word class in front of func. Also, it's missing a return value outside the for loops. Finally, constants should be declared using let and not var. We should also change the last for loop so that the first parameter inside for() does not matter.
     
     
 }
